@@ -1,39 +1,298 @@
+```html
 <!DOCTYPE html>
 <html lang="tr">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RastelCraft | Resmi Web Sitesi</title>
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>RastelCraft | Resmi Web Sitesi</title>
+
+<link rel="stylesheet" href="style.css">
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 </head>
+
 <body>
 
-    <!-- Navigasyon Menüsü -->
-    <nav class="navbar">
-        <div class="logo">💎 RastelCraft</div>
-        <ul class="nav-links">
-            <li><a href="#home">Ana Sayfa</a></li>
-            <li><a href="magaza.html">Mağaza</a></li>
-            <li><a href="https://discord.gg" target="_blank" class="discord-btn">Discord'a Katıl</a></li>
-        </ul>
-    </nav>
+<!-- Navigasyon Menüsü -->
+<nav class="navbar">
 
-    <!-- Giriş Bölümü (Logonuz Arka Plana Entegre Edildi) -->
-    <header id="home" class="hero-section">
-        <div class="hero-content">
-            <h1>RastelCraft Dünyasına Hoş Geldiniz!</h1>
-            <p>Eğlencenin ve adaletin adresi. Aramıza katılmaya hazır mısın?</p>
-            <div class="hero-buttons">
-                <a href="magaza.html" class="btn btn-store">🛒 Mağazayı Gör</a>
-                <a href="https://discord.gg" target="_blank" class="btn btn-discord">💬 Topluluğa Katıl</a>
-            </div>
+    <div class="logo">💎 RastelCraft</div>
+
+    <ul class="nav-links">
+
+        <li><a href="#home">Ana Sayfa</a></li>
+
+        <li><a href="magaza.html">Mağaza</a></li>
+
+        <li>
+            <a href="https://discord.gg" target="_blank" class="discord-btn">
+                Discord'a Katıl
+            </a>
+        </li>
+
+        <li>
+            <button id="loginBtn" class="discord-btn">
+                Giriş Yap
+            </button>
+        </li>
+
+        <li>
+            <button id="registerBtn" class="discord-btn">
+                Kayıt Ol
+            </button>
+        </li>
+
+    </ul>
+
+</nav>
+
+
+<!-- Giriş Bölümü -->
+<header id="home" class="hero-section">
+
+    <div class="hero-content">
+
+        <h1>RastelCraft Dünyasına Hoş Geldiniz!</h1>
+
+        <p>Eğlencenin ve adaletin adresi. Aramıza katılmaya hazır mısın?</p>
+
+        <div class="hero-buttons">
+
+            <a href="magaza.html" class="btn btn-store">
+                🛒 Mağazayı Gör
+            </a>
+
+            <a href="https://discord.gg" target="_blank" class="btn btn-discord">
+                💬 Topluluğa Katıl
+            </a>
+
         </div>
-    </header>
 
-    <!-- Alt Bilgi (Footer) -->
-    <footer class="footer">
-        <p>&copy; 2026 RastelCraft. Tüm Hakları Saklıdır.</p>
-    </footer>
+        <p id="userStatus"></p>
+
+    </div>
+
+</header>
+
+
+<!-- Giriş / Kayıt Penceresi -->
+<div id="authModal" class="auth-modal">
+
+    <div class="auth-box">
+
+        <button id="closeAuth" class="close-auth">✕</button>
+
+        <h2 id="authTitle">Giriş Yap</h2>
+
+        <input
+            type="email"
+            id="email"
+            placeholder="E-posta"
+        >
+
+        <input
+            type="password"
+            id="password"
+            placeholder="Şifre"
+        >
+
+        <button id="authSubmit" class="auth-submit">
+            Giriş Yap
+        </button>
+
+        <p id="authMessage"></p>
+
+        <button id="switchAuth" class="switch-auth">
+            Hesabın yok mu? Kayıt Ol
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- Footer -->
+<footer class="footer">
+
+    <p>
+        &copy; 2026 RastelCraft. Tüm Hakları Saklıdır.
+    </p>
+
+</footer>
+
+
+<script>
+
+const SUPABASE_URL = "https://hoasucytohgdjbircqwv.supabase.co";
+
+const SUPABASE_KEY = "sb_publishable_nl6kWJyd5gkzoaiRTLo4nw_xZCsiYka";
+
+const supabaseClient = window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+);
+
+
+const loginBtn = document.getElementById("loginBtn");
+const registerBtn = document.getElementById("registerBtn");
+
+const authModal = document.getElementById("authModal");
+const closeAuth = document.getElementById("closeAuth");
+
+const authTitle = document.getElementById("authTitle");
+const authSubmit = document.getElementById("authSubmit");
+
+const switchAuth = document.getElementById("switchAuth");
+
+const emailInput = document.getElementById("email");
+const passwordInput = document.getElementById("password");
+
+const authMessage = document.getElementById("authMessage");
+const userStatus = document.getElementById("userStatus");
+
+let registerMode = false;
+
+
+function openAuth(register = false) {
+
+    registerMode = register;
+
+    authModal.style.display = "flex";
+
+    authTitle.textContent =
+        registerMode ? "Kayıt Ol" : "Giriş Yap";
+
+    authSubmit.textContent =
+        registerMode ? "Kayıt Ol" : "Giriş Yap";
+
+    switchAuth.textContent =
+        registerMode
+        ? "Zaten hesabın var mı? Giriş Yap"
+        : "Hesabın yok mu? Kayıt Ol";
+
+    authMessage.textContent = "";
+}
+
+
+loginBtn.onclick = () => openAuth(false);
+
+registerBtn.onclick = () => openAuth(true);
+
+
+closeAuth.onclick = () => {
+
+    authModal.style.display = "none";
+
+};
+
+
+switchAuth.onclick = () => {
+
+    openAuth(!registerMode);
+
+};
+
+
+authSubmit.onclick = async () => {
+
+    const email = emailInput.value.trim();
+    const password = passwordInput.value;
+
+    if (!email || !password) {
+
+        authMessage.textContent =
+            "E-posta ve şifre gerekli.";
+
+        return;
+    }
+
+
+    authMessage.textContent = "İşlem yapılıyor...";
+
+
+    if (registerMode) {
+
+        const { data, error } =
+            await supabaseClient.auth.signUp({
+
+                email: email,
+                password: password
+
+            });
+
+
+        if (error) {
+
+            authMessage.textContent =
+                error.message;
+
+            return;
+        }
+
+
+        authMessage.textContent =
+            "Kayıt başarılı! E-postanı kontrol et.";
+
+    }
+
+    else {
+
+        const { data, error } =
+            await supabaseClient.auth.signInWithPassword({
+
+                email: email,
+                password: password
+
+            });
+
+
+        if (error) {
+
+            authMessage.textContent =
+                error.message;
+
+            return;
+        }
+
+
+        authMessage.textContent =
+            "Giriş başarılı!";
+
+        setTimeout(() => {
+
+            authModal.style.display = "none";
+
+        }, 1000);
+
+    }
+
+};
+
+
+async function checkUser() {
+
+    const { data } =
+        await supabaseClient.auth.getUser();
+
+
+    if (data.user) {
+
+        userStatus.textContent =
+            "Giriş yapıldı: " + data.user.email;
+
+    }
+
+}
+
+
+checkUser();
+
+
+</script>
 
 </body>
 </html>
+```
