@@ -3,29 +3,31 @@
 <html lang="tr">
 
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>RastelCraft | Resmi Web Sitesi</title>
+    <title>RastelCraft | Resmi Web Sitesi</title>
 
-<link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css">
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 
 <body>
 
-<!-- Navigasyon Menüsü -->
 <nav class="navbar">
 
     <div class="logo">💎 RastelCraft</div>
 
     <ul class="nav-links">
 
-        <li><a href="#home">Ana Sayfa</a></li>
+        <li>
+            <a href="#home">Ana Sayfa</a>
+        </li>
 
-        <li><a href="magaza.html">Mağaza</a></li>
+        <li>
+            <a href="magaza.html">Mağaza</a>
+        </li>
 
         <li>
             <a href="https://discord.gg" target="_blank" class="discord-btn">
@@ -33,15 +35,22 @@
             </a>
         </li>
 
-        <li>
+        <li id="loginArea">
             <button id="loginBtn" class="discord-btn">
                 Giriş Yap
             </button>
         </li>
 
-        <li>
+        <li id="registerArea">
             <button id="registerBtn" class="discord-btn">
                 Kayıt Ol
+            </button>
+        </li>
+
+        <li id="userArea" style="display:none;">
+            <span id="usernameDisplay"></span>
+            <button id="logoutBtn" class="discord-btn">
+                Çıkış Yap
             </button>
         </li>
 
@@ -50,14 +59,16 @@
 </nav>
 
 
-<!-- Giriş Bölümü -->
 <header id="home" class="hero-section">
 
     <div class="hero-content">
 
         <h1>RastelCraft Dünyasına Hoş Geldiniz!</h1>
 
-        <p>Eğlencenin ve adaletin adresi. Aramıza katılmaya hazır mısın?</p>
+        <p>
+            Eğlencenin ve adaletin adresi.
+            Aramıza katılmaya hazır mısın?
+        </p>
 
         <div class="hero-buttons">
 
@@ -71,39 +82,64 @@
 
         </div>
 
-        <p id="userStatus"></p>
-
     </div>
 
 </header>
 
 
-<!-- Giriş / Kayıt Penceresi -->
+<!-- GİRİŞ / KAYIT PENCERESİ -->
+
 <div id="authModal" class="auth-modal">
 
     <div class="auth-box">
 
-        <button id="closeAuth" class="close-auth">✕</button>
+        <button id="closeAuth" class="close-auth">
+            ×
+        </button>
 
-        <h2 id="authTitle">Giriş Yap</h2>
+        <h2 id="authTitle">
+            Giriş Yap
+        </h2>
+
+
+        <!-- Kullanıcı adı sadece kayıt olurken görünür -->
+
+        <div id="usernameContainer" style="display:none;">
+
+            <input
+                type="text"
+                id="username"
+                placeholder="Kullanıcı adı"
+                maxlength="20"
+                autocomplete="username"
+            >
+
+        </div>
+
 
         <input
             type="email"
             id="email"
             placeholder="E-posta"
+            autocomplete="email"
         >
+
 
         <input
             type="password"
             id="password"
             placeholder="Şifre"
+            autocomplete="current-password"
         >
+
 
         <button id="authSubmit" class="auth-submit">
             Giriş Yap
         </button>
 
+
         <p id="authMessage"></p>
+
 
         <button id="switchAuth" class="switch-auth">
             Hesabın yok mu? Kayıt Ol
@@ -114,7 +150,6 @@
 </div>
 
 
-<!-- Footer -->
 <footer class="footer">
 
     <p>
@@ -126,173 +161,422 @@
 
 <script>
 
-const SUPABASE_URL = "https://hoasucytohgdjbircqwv.supabase.co";
-
-const SUPABASE_KEY = "sb_publishable_nl6kWJyd5gkzoaiRTLo4nw_xZCsiYka";
-
-const supabaseClient = window.supabase.createClient(
-    SUPABASE_URL,
-    SUPABASE_KEY
-);
+const SUPABASE_URL =
+    "https://hoasucytohgdjbircqwv.supabase.co";
 
 
-const loginBtn = document.getElementById("loginBtn");
-const registerBtn = document.getElementById("registerBtn");
+const SUPABASE_KEY =
+    "BURAYA_SB_PUBLISHABLE_KEYİNİ_YAZ";
 
-const authModal = document.getElementById("authModal");
-const closeAuth = document.getElementById("closeAuth");
 
-const authTitle = document.getElementById("authTitle");
-const authSubmit = document.getElementById("authSubmit");
+const supabaseClient =
+    window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_KEY
+    );
 
-const switchAuth = document.getElementById("switchAuth");
 
-const emailInput = document.getElementById("email");
-const passwordInput = document.getElementById("password");
+const loginBtn =
+    document.getElementById("loginBtn");
 
-const authMessage = document.getElementById("authMessage");
-const userStatus = document.getElementById("userStatus");
+const registerBtn =
+    document.getElementById("registerBtn");
+
+const logoutBtn =
+    document.getElementById("logoutBtn");
+
+const authModal =
+    document.getElementById("authModal");
+
+const closeAuth =
+    document.getElementById("closeAuth");
+
+const authTitle =
+    document.getElementById("authTitle");
+
+const authSubmit =
+    document.getElementById("authSubmit");
+
+const switchAuth =
+    document.getElementById("switchAuth");
+
+const usernameContainer =
+    document.getElementById("usernameContainer");
+
+const usernameInput =
+    document.getElementById("username");
+
+const emailInput =
+    document.getElementById("email");
+
+const passwordInput =
+    document.getElementById("password");
+
+const authMessage =
+    document.getElementById("authMessage");
+
+const loginArea =
+    document.getElementById("loginArea");
+
+const registerArea =
+    document.getElementById("registerArea");
+
+const userArea =
+    document.getElementById("userArea");
+
+const usernameDisplay =
+    document.getElementById("usernameDisplay");
+
 
 let registerMode = false;
 
 
-function openAuth(register = false) {
+function openAuth(isRegister) {
 
-    registerMode = register;
+    registerMode = isRegister;
 
     authModal.style.display = "flex";
 
-    authTitle.textContent =
-        registerMode ? "Kayıt Ol" : "Giriş Yap";
-
-    authSubmit.textContent =
-        registerMode ? "Kayıt Ol" : "Giriş Yap";
-
-    switchAuth.textContent =
-        registerMode
-        ? "Zaten hesabın var mı? Giriş Yap"
-        : "Hesabın yok mu? Kayıt Ol";
-
     authMessage.textContent = "";
-}
 
-
-loginBtn.onclick = () => openAuth(false);
-
-registerBtn.onclick = () => openAuth(true);
-
-
-closeAuth.onclick = () => {
-
-    authModal.style.display = "none";
-
-};
-
-
-switchAuth.onclick = () => {
-
-    openAuth(!registerMode);
-
-};
-
-
-authSubmit.onclick = async () => {
-
-    const email = emailInput.value.trim();
-    const password = passwordInput.value;
-
-    if (!email || !password) {
-
-        authMessage.textContent =
-            "E-posta ve şifre gerekli.";
-
-        return;
-    }
-
-
-    authMessage.textContent = "İşlem yapılıyor...";
+    usernameInput.value = "";
+    emailInput.value = "";
+    passwordInput.value = "";
 
 
     if (registerMode) {
 
-        const { data, error } =
-            await supabaseClient.auth.signUp({
+        authTitle.textContent =
+            "RastelCraft'a Kayıt Ol";
 
-                email: email,
-                password: password
+        authSubmit.textContent =
+            "Kayıt Ol";
 
-            });
+        usernameContainer.style.display =
+            "block";
+
+        switchAuth.textContent =
+            "Zaten hesabın var mı? Giriş Yap";
+
+    } else {
+
+        authTitle.textContent =
+            "RastelCraft'a Giriş Yap";
+
+        authSubmit.textContent =
+            "Giriş Yap";
+
+        usernameContainer.style.display =
+            "none";
+
+        switchAuth.textContent =
+            "Hesabın yok mu? Kayıt Ol";
+    }
+}
 
 
-        if (error) {
+loginBtn.addEventListener(
+    "click",
+    () => openAuth(false)
+);
+
+
+registerBtn.addEventListener(
+    "click",
+    () => openAuth(true)
+);
+
+
+closeAuth.addEventListener(
+    "click",
+    () => {
+
+        authModal.style.display =
+            "none";
+
+    }
+);
+
+
+authModal.addEventListener(
+    "click",
+    (event) => {
+
+        if (event.target === authModal) {
+
+            authModal.style.display =
+                "none";
+
+        }
+
+    }
+);
+
+
+switchAuth.addEventListener(
+    "click",
+    () => {
+
+        openAuth(!registerMode);
+
+    }
+);
+
+
+authSubmit.addEventListener(
+    "click",
+    async () => {
+
+        const username =
+            usernameInput.value.trim();
+
+        const email =
+            emailInput.value.trim();
+
+        const password =
+            passwordInput.value;
+
+
+        if (registerMode && !username) {
 
             authMessage.textContent =
-                error.message;
+                "Kullanıcı adı gir.";
 
             return;
         }
 
 
-        authMessage.textContent =
-            "Kayıt başarılı! E-postanı kontrol et.";
-
-    }
-
-    else {
-
-        const { data, error } =
-            await supabaseClient.auth.signInWithPassword({
-
-                email: email,
-                password: password
-
-            });
-
-
-        if (error) {
+        if (!email) {
 
             authMessage.textContent =
-                error.message;
+                "E-posta gir.";
 
             return;
         }
 
 
+        if (!password) {
+
+            authMessage.textContent =
+                "Şifre gir.";
+
+            return;
+        }
+
+
+        if (registerMode && username.length < 3) {
+
+            authMessage.textContent =
+                "Kullanıcı adı en az 3 karakter olmalı.";
+
+            return;
+        }
+
+
+        if (password.length < 6) {
+
+            authMessage.textContent =
+                "Şifre en az 6 karakter olmalı.";
+
+            return;
+        }
+
+
+        authSubmit.disabled = true;
+
         authMessage.textContent =
-            "Giriş başarılı!";
+            "İşlem yapılıyor...";
 
-        setTimeout(() => {
 
-            authModal.style.display = "none";
+        try {
 
-        }, 1000);
+            if (registerMode) {
+
+                const {
+                    data,
+                    error
+                } =
+                await supabaseClient.auth.signUp({
+
+                    email: email,
+
+                    password: password,
+
+                    options: {
+
+                        data: {
+
+                            username: username
+
+                        },
+
+                        emailRedirectTo:
+                            "https://rastelcraft.github.io/rastelcraft/"
+
+                    }
+
+                });
+
+
+                if (error) {
+
+                    throw error;
+
+                }
+
+
+                authMessage.textContent =
+                    "Kayıt başarılı! E-postanı kontrol et.";
+
+            } else {
+
+                const {
+                    data,
+                    error
+                } =
+                await supabaseClient.auth.signInWithPassword({
+
+                    email: email,
+
+                    password: password
+
+                });
+
+
+                if (error) {
+
+                    throw error;
+
+                }
+
+
+                authMessage.textContent =
+                    "Giriş başarılı!";
+
+
+                updateUserInterface(
+                    data.user
+                );
+
+
+                setTimeout(
+                    () => {
+
+                        authModal.style.display =
+                            "none";
+
+                    },
+                    700
+                );
+
+            }
+
+        } catch (error) {
+
+            authMessage.textContent =
+                error.message;
+
+        }
+
+
+        authSubmit.disabled = false;
 
     }
-
-};
-
-
-async function checkUser() {
-
-    const { data } =
-        await supabaseClient.auth.getUser();
+);
 
 
-    if (data.user) {
+logoutBtn.addEventListener(
+    "click",
+    async () => {
 
-        userStatus.textContent =
-            "Giriş yapıldı: " + data.user.email;
+        await supabaseClient.auth.signOut();
+
+        updateUserInterface(null);
+
+    }
+);
+
+
+function updateUserInterface(user) {
+
+    if (user) {
+
+        let username =
+            user.user_metadata?.username;
+
+
+        if (!username) {
+
+            username =
+                user.email.split("@")[0];
+
+        }
+
+
+        usernameDisplay.textContent =
+            "👤 " + username;
+
+
+        loginArea.style.display =
+            "none";
+
+        registerArea.style.display =
+            "none";
+
+        userArea.style.display =
+            "flex";
+
+    } else {
+
+        loginArea.style.display =
+            "block";
+
+        registerArea.style.display =
+            "block";
+
+        userArea.style.display =
+            "none";
+
+        usernameDisplay.textContent =
+            "";
 
     }
 
 }
 
 
-checkUser();
+async function checkCurrentUser() {
 
+    const {
+        data
+    } =
+    await supabaseClient.auth.getUser();
+
+
+    updateUserInterface(
+        data.user
+    );
+
+}
+
+
+supabaseClient.auth.onAuthStateChange(
+    (event, session) => {
+
+        updateUserInterface(
+            session?.user || null
+        );
+
+    }
+);
+
+
+checkCurrentUser();
 
 </script>
 
 </body>
+
 </html>
 ```
+
