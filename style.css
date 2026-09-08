@@ -5,6 +5,9 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    scroll-behavior: smooth;
+}
 
 body {
     background-color: #f0f9ff;
@@ -50,6 +53,8 @@ body {
     color: #0369a1;
 }
 
+/* Discord Butonu */
+
 .discord-btn {
     background-color: #38bdf8 !important;
     color: white !important;
@@ -63,11 +68,16 @@ body {
     background-color: #0284c7;
 }
 
-/* Giriş Bölümü - Gönderdiğiniz Logo ve Mavi Temaya Uygun Tasarlandı */
+/* Ana Sayfa */
 
 .hero-section {
-    background: linear-gradient(rgba(240, 249, 255, 0.85), rgba(255, 255, 255, 0.9)),
-                url('https://yt3.googleusercontent.com/DcaaxOpJ_uASJcORoKCxzWk34-3QQOUu5FohdNtEwh2fF6UYS9QV01JspMozAj4UWuYhYlCi5bo=s120-c-k-c0x00ffffff-no-rj') no-repeat center center;
+    background:
+        linear-gradient(
+            rgba(240, 249, 255, 0.85),
+            rgba(255, 255, 255, 0.9)
+        ),
+        url('https://yt3.googleusercontent.com/DcaaxOpJ_uASJcORoKCxzWk34-3QQOUu5FohdNtEwh2fF6UYS9QV01JspMozAj4UWuYhYlCi5bo=s120-c-k-c0x00ffffff-no-rj')
+        no-repeat center center;
 
     background-size: contain;
     height: 60vh;
@@ -94,14 +104,14 @@ body {
     font-weight: 500;
 }
 
+/* Ana Sayfa Butonları */
+
 .hero-buttons {
     display: flex;
     justify-content: center;
     gap: 20px;
     flex-wrap: wrap;
 }
-
-/* Butonlar */
 
 .btn {
     display: inline-block;
@@ -137,7 +147,55 @@ body {
     background-color: #e0f2fe;
 }
 
-/* Mağaza Bölümü */
+/* Mağaza */
+
+.store-page {
+    min-height: calc(100vh - 80px);
+}
+
+.store-hero {
+    text-align: center;
+    padding: 55px 20px 25px;
+    background:
+        linear-gradient(
+            180deg,
+            #e0f2fe,
+            #f0f9ff
+        );
+    border-bottom: 2px solid #bae6fd;
+}
+
+.store-logo {
+    width: 110px;
+    height: 110px;
+    object-fit: contain;
+    border-radius: 20px;
+    margin-bottom: 15px;
+}
+
+.store-hero h1 {
+    font-size: 2.8rem;
+    color: #0369a1;
+    margin-bottom: 10px;
+}
+
+.store-hero p {
+    color: #0284c7;
+    font-size: 1.15rem;
+    margin-bottom: 18px;
+}
+
+.server-ip {
+    display: inline-block;
+    background: #ffffff;
+    color: #0369a1;
+    border: 2px solid #bae6fd;
+    border-radius: 10px;
+    padding: 10px 18px;
+    font-weight: 700;
+}
+
+/* Mağaza Kart Alanı */
 
 .store-section {
     padding: 80px 5%;
@@ -145,31 +203,16 @@ body {
     margin: 0 auto;
 }
 
-.section-title {
-    text-align: center;
-    margin-bottom: 50px;
-}
-
-.section-title h2 {
-    font-size: 2.5rem;
-    color: #0369a1;
-    margin-bottom: 10px;
-}
-
-.section-title p {
-    color: #0284c7;
-    font-size: 1.1rem;
-}
-
-/* Kartlar Alanı */
-
 .cards-container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    grid-template-columns: repeat(
+        auto-fit,
+        minmax(280px, 1fr)
+    );
     gap: 30px;
 }
 
-/* VIP Ürün Kartı */
+/* VIP Kartları */
 
 .card {
     background-color: #ffffff;
@@ -179,7 +222,10 @@ body {
     text-align: center;
     position: relative;
     overflow: hidden;
-    transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+    transition:
+        transform 0.3s,
+        box-shadow 0.3s,
+        border-color 0.3s;
     box-shadow: 0 4px 6px rgba(2, 132, 199, 0.05);
 }
 
@@ -191,7 +237,11 @@ body {
 
 .special-card {
     border-color: #38bdf8;
-    background: linear-gradient(#ffffff, #e0f2fe);
+    background:
+        linear-gradient(
+            #ffffff,
+            #e0f2fe
+        );
 }
 
 /* Rozetler */
@@ -211,6 +261,8 @@ body {
 .badge.gold {
     background-color: #0284c7;
 }
+
+/* Kart Yazıları */
 
 .card h3 {
     font-size: 1.7rem;
@@ -239,7 +291,7 @@ body {
     min-height: 45px;
 }
 
-/* Satın Al Butonu */
+/* Satın Al */
 
 .buy-btn {
     display: block;
@@ -249,7 +301,9 @@ body {
     padding: 12px;
     border-radius: 8px;
     font-weight: bold;
-    transition: background-color 0.3s, color 0.3s;
+    transition:
+        background-color 0.3s,
+        color 0.3s;
 }
 
 .buy-btn:hover {
@@ -257,7 +311,7 @@ body {
     color: white;
 }
 
-/* Alt Bilgi */
+/* Footer */
 
 .footer {
     background-color: #ffffff;
@@ -268,3 +322,26 @@ body {
     border-top: 2px solid #e0f2fe;
     font-weight: bold;
 }
+
+/* Telefon */
+
+@media (max-width: 600px) {
+
+    .nav-links {
+        gap: 10px;
+    }
+
+    .nav-links a {
+        font-size: 0.9rem;
+    }
+
+    .hero-content h1 {
+        font-size: 2.3rem;
+    }
+
+    .store-hero h1 {
+        font-size: 2.1rem;
+    }
+
+}
+```
