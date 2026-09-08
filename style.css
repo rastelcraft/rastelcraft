@@ -1,80 +1,113 @@
 ```css
-/* ========================= */
-/* AUTH SAYFALARI             */
-/* ========================= */
+/* =============================== */
+/* VIP MAĞAZA KARTLARI */
+/* =============================== */
 
-.auth-page {
-    min-height: calc(100vh - 80px);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 30px 20px;
+.vip-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 20px;
 }
 
-.auth-box {
-    width: 100%;
-    max-width: 420px;
-    background: white;
-    padding: 35px;
-    border-radius: 18px;
-    box-shadow: 0 15px 45px rgba(0, 0, 0, 0.18);
-    text-align: center;
-}
-
-.auth-box h2 {
-    margin-bottom: 25px;
-}
-
-.auth-box input {
-    box-sizing: border-box;
-    width: 100%;
-    padding: 13px 15px;
-    margin-bottom: 14px;
+.vip-card {
+    background: #ffffff;
     border: 2px solid #bae6fd;
-    border-radius: 9px;
-    outline: none;
-    font-size: 16px;
+    border-radius: 16px;
+    padding: 35px 25px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(2, 132, 199, 0.08);
+    transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
 }
 
-.auth-box input:focus {
-    border-color: #0284c7;
+.vip-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 30px rgba(2, 132, 199, 0.18);
+    border-color: #38bdf8;
 }
 
-.auth-submit {
-    width: 100%;
-    padding: 13px;
-    border: none;
-    border-radius: 9px;
-    background: #0284c7;
-    color: white;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
+.vip-card h3 {
+    font-size: 1.7rem;
+    color: #0369a1;
+    margin-bottom: 15px;
 }
 
-.auth-submit:hover {
-    background: #0369a1;
-}
-
-.auth-submit:disabled {
-    opacity: 0.6;
-    cursor: wait;
-}
-
-#message {
-    min-height: 22px;
-    margin-top: 15px;
-}
-
-.switch-auth {
-    display: block;
-    margin-top: 18px;
+.vip-card .vip-price {
+    font-size: 2.8rem;
+    font-weight: 800;
     color: #0284c7;
-    text-decoration: none;
-    font-weight: bold;
+    margin-bottom: 15px;
 }
 
-.switch-auth:hover {
-    text-decoration: underline;
+.vip-card .vip-price span {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #0369a1;
+}
+
+.vip-card p {
+    color: #0284c7;
+    font-size: 0.95rem;
+    margin-bottom: 30px;
+    line-height: 1.5;
+}
+
+.vip-card .vip-buy {
+    display: block;
+    background-color: #0284c7;
+    color: #ffffff;
+    text-decoration: none;
+    padding: 12px;
+    border-radius: 8px;
+    font-weight: bold;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.vip-card .vip-buy:hover {
+    background-color: #0369a1;
+    transform: translateY(-2px);
+}
+
+/* Özel VIP kartı */
+
+.vip-card.vip-special {
+    border-color: #38bdf8;
+    background: linear-gradient(#ffffff, #e0f2fe);
+}
+
+/* VIP rozet */
+
+.vip-badge {
+    position: absolute;
+    top: 15px;
+    right: -30px;
+    background-color: #38bdf8;
+    color: white;
+    padding: 4px 30px;
+    font-size: 0.75rem;
+    font-weight: bold;
+    transform: rotate(45deg);
+}
+
+.vip-badge.gold {
+    background-color: #0284c7;
+}
+
+/* Mobil VIP */
+
+@media (max-width: 700px) {
+    .vip-container {
+        grid-template-columns: 1fr;
+        padding: 10px;
+    }
+
+    .vip-card {
+        padding: 30px 20px;
+    }
 }
 ```
+
