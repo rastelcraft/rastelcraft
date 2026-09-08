@@ -66,26 +66,19 @@ body {
     background-color: #0284c7;
 }
 
-/* Giriş Bölümü */
+/* Giriş Bölümü - Gönderdiğiniz Logo ve Mavi Temaya Uygun Tasarlandı */
 
 .hero-section {
-    background: linear-gradient(
-        rgba(240, 249, 255, 0.85),
-        rgba(255, 255, 255, 0.9)
-    ),
-    url('https://yt3.googleusercontent.com/DcaaxOpJ_uASJcORoKCxzWk34-3QQOUu5FohdNtEwh2fF6UYS9QV01JspMozAj4UWuYhYlCi5bo=s120-c-k-c0x00ffffff-no-rj')
-    no-repeat center center;
+    background: linear-gradient(rgba(240, 249, 255, 0.85), rgba(255, 255, 255, 0.9)),
+                url('https://yt3.googleusercontent.com/DcaaxOpJ_uASJcORoKCxzWk34-3QQOUu5FohdNtEwh2fF6UYS9QV01JspMozAj4UWuYhYlCi5bo=s120-c-k-c0x00ffffff-no-rj') no-repeat center center;
 
     background-size: contain;
     height: 60vh;
-
     display: flex;
     justify-content: center;
     align-items: center;
-
     text-align: center;
     padding: 0 20px;
-
     border-bottom: 3px solid #bae6fd;
     background-color: #f0f9ff;
 }
@@ -179,7 +172,7 @@ body {
     gap: 30px;
 }
 
-/* VIP Ürün Kartları */
+/* VIP Ürün Kartı */
 
 .card {
     background-color: #ffffff;
@@ -189,12 +182,7 @@ body {
     text-align: center;
     position: relative;
     overflow: hidden;
-
-    transition:
-        transform 0.3s,
-        box-shadow 0.3s,
-        border-color 0.3s;
-
+    transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
     box-shadow: 0 4px 6px rgba(2, 132, 199, 0.05);
 }
 
@@ -209,21 +197,17 @@ body {
     background: linear-gradient(#ffffff, #e0f2fe);
 }
 
-/* VIP Rozetleri */
+/* Rozetler */
 
 .badge {
     position: absolute;
     top: 15px;
     right: -30px;
-
     background-color: #38bdf8;
     color: white;
-
     padding: 4px 30px;
-
     font-size: 0.75rem;
     font-weight: bold;
-
     transform: rotate(45deg);
 }
 
@@ -231,15 +215,11 @@ body {
     background-color: #0284c7;
 }
 
-/* VIP Başlık */
-
 .card h3 {
     font-size: 1.7rem;
     color: #0369a1;
     margin-bottom: 15px;
 }
-
-/* VIP Fiyat */
 
 .price {
     font-size: 2.8rem;
@@ -254,14 +234,10 @@ body {
     color: #0369a1;
 }
 
-/* VIP Açıklama */
-
 .card p {
     color: #0284c7;
     font-size: 0.95rem;
-
     margin-bottom: 30px;
-
     line-height: 1.5;
     min-height: 45px;
 }
@@ -270,21 +246,13 @@ body {
 
 .buy-btn {
     display: block;
-
     background-color: #e0f2fe;
     color: #0369a1;
-
     text-decoration: none;
-
     padding: 12px;
-
     border-radius: 8px;
-
     font-weight: bold;
-
-    transition:
-        background-color 0.3s,
-        color 0.3s;
+    transition: background-color 0.3s, color 0.3s;
 }
 
 .buy-btn:hover {
@@ -292,353 +260,15 @@ body {
     color: white;
 }
 
+/* Alt Bilgi */
 
-/* =============================== */
-/* EK VIP MAĞAZA TASARIMI */
-/* =============================== */
-
-.vip-container {
-    display: grid;
-
-    grid-template-columns:
-        repeat(auto-fit, minmax(280px, 1fr));
-
-    gap: 30px;
-
-    max-width: 1300px;
-
-    margin: 0 auto;
-
-    padding: 20px;
-}
-
-.vip-card {
+.footer {
     background-color: #ffffff;
-
-    border: 2px solid #bae6fd;
-
-    border-radius: 16px;
-
-    padding: 35px 25px;
-
+    color: #0284c7;
     text-align: center;
-
-    position: relative;
-
-    overflow: hidden;
-
-    box-shadow:
-        0 4px 10px rgba(2, 132, 199, 0.08);
-
-    transition:
-        transform 0.3s,
-        box-shadow 0.3s,
-        border-color 0.3s;
-}
-
-.vip-card:hover {
-    transform: translateY(-8px);
-
-    box-shadow:
-        0 15px 30px rgba(2, 132, 199, 0.18);
-
-    border-color: #38bdf8;
-}
-
-.vip-card h3 {
-    font-size: 1.7rem;
-    color: #0369a1;
-    margin-bottom: 15px;
-}
-
-.vip-price {
-    font-size: 2.8rem;
-    font-weight: 800;
-
-    color: #0284c7;
-
-    margin-bottom: 15px;
-}
-
-.vip-price span {
-    font-size: 1.2rem;
-    font-weight: 600;
-
-    color: #0369a1;
-}
-
-.vip-card p {
-    color: #0284c7;
-
-    font-size: 0.95rem;
-
-    margin-bottom: 30px;
-
-    line-height: 1.5;
-}
-
-.vip-buy {
-    display: block;
-
-    background-color: #0284c7;
-    color: #ffffff;
-
-    text-decoration: none;
-
-    padding: 12px;
-
-    border-radius: 8px;
-
+    padding: 25px;
+    margin-top: 60px;
+    border-top: 2px solid #e0f2fe;
     font-weight: bold;
-
-    transition:
-        background-color 0.3s,
-        transform 0.2s;
-}
-
-.vip-buy:hover {
-    background-color: #0369a1;
-
-    transform: translateY(-2px);
-}
-
-.vip-special {
-    border-color: #38bdf8;
-
-    background:
-        linear-gradient(#ffffff, #e0f2fe);
-}
-
-.vip-badge {
-    position: absolute;
-
-    top: 15px;
-    right: -30px;
-
-    background-color: #38bdf8;
-
-    color: white;
-
-    padding: 4px 30px;
-
-    font-size: 0.75rem;
-
-    font-weight: bold;
-
-    transform: rotate(45deg);
-}
-
-.vip-badge.gold {
-    background-color: #0284c7;
-}
-
-
-/* =============================== */
-/* GİRİŞ / KAYIT SAYFALARI */
-/* =============================== */
-
-.auth-page {
-    min-height: 100vh;
-
-    background-color: #f0f9ff;
-}
-
-.auth-container {
-    min-height: calc(100vh - 80px);
-
-    display: flex;
-
-    justify-content: center;
-    align-items: center;
-
-    padding: 40px 20px;
-}
-
-.auth-box {
-    width: 100%;
-    max-width: 430px;
-
-    background-color: #ffffff;
-
-    border: 2px solid #bae6fd;
-
-    border-radius: 16px;
-
-    padding: 35px;
-
-    box-shadow:
-        0 10px 30px rgba(2, 132, 199, 0.10);
-}
-
-.auth-title {
-    text-align: center;
-
-    color: #0369a1;
-
-    font-size: 2rem;
-
-    font-weight: 800;
-
-    margin-bottom: 10px;
-}
-
-.auth-description {
-    text-align: center;
-
-    color: #0284c7;
-
-    margin-bottom: 25px;
-}
-
-.auth-form {
-    display: flex;
-
-    flex-direction: column;
-
-    gap: 15px;
-}
-
-.auth-form label {
-    color: #0369a1;
-
-    font-weight: 700;
-}
-
-.auth-form input {
-    width: 100%;
-
-    padding: 13px 15px;
-
-    border:
-        2px solid #bae6fd;
-
-    border-radius: 8px;
-
-    outline: none;
-
-    font-size: 1rem;
-
-    color: #0f172a;
-
-    background-color: #ffffff;
-
-    transition:
-        border-color 0.2s,
-        box-shadow 0.2s;
-}
-
-.auth-form input:focus {
-    border-color: #38bdf8;
-
-    box-shadow:
-        0 0 0 3px rgba(56, 189, 248, 0.15);
-}
-
-.auth-button {
-    margin-top: 5px;
-
-    width: 100%;
-
-    padding: 13px;
-
-    border: none;
-
-    border-radius: 8px;
-
-    background-color: #0284c7;
-
-    color: #ffffff;
-
-    font-size: 1rem;
-
-    font-weight: 700;
-
-    cursor: pointer;
-
-    transition:
-        background-color 0.2s,
-        transform 0.2s;
-}
-
-.auth-button:hover {
-    background-color: #0369a1;
-
-    transform: translateY(-2px);
-}
-
-.auth-message {
-    text-align: center;
-
-    margin-top: 15px;
-
-    color: #0284c7;
-
-    font-weight: 600;
-}
-
-.auth-switch {
-    text-align: center;
-
-    margin-top: 20px;
-
-    color: #0284c7;
-}
-
-.auth-switch a {
-    color: #0369a1;
-
-    font-weight: 700;
-
-    text-decoration: none;
-}
-
-.auth-switch a:hover {
-    text-decoration: underline;
-}
-
-
-/* =============================== */
-/* MOBİL */
-/* =============================== */
-
-@media (max-width: 700px) {
-
-    .nav-links {
-        gap: 10px;
-
-        flex-wrap: wrap;
-
-        justify-content: flex-end;
-    }
-
-    .nav-links a {
-        font-size: 0.9rem;
-    }
-
-    .hero-content h1 {
-        font-size: 2.3rem;
-    }
-
-    .hero-content p {
-        font-size: 1.05rem;
-    }
-
-    .auth-box {
-        padding: 25px 20px;
-    }
-
-    .auth-title {
-        font-size: 1.7rem;
-    }
-
-    .vip-container {
-        grid-template-columns: 1fr;
-
-        padding: 10px;
-    }
-
-    .vip-card {
-        padding: 30px 20px;
-    }
 }
 ```
