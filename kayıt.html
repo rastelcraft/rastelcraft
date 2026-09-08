@@ -1,0 +1,239 @@
+```html
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Kayıt Ol | RastelCraft</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+</head>
+
+<body>
+
+<nav class="navbar">
+
+    <div class="logo">
+        💎 RastelCraft
+    </div>
+
+    <ul class="nav-links">
+
+        <li>
+            <a href="index.html">
+                Ana Sayfa
+            </a>
+        </li>
+
+        <li>
+            <a href="giris.html">
+                Giriş Yap
+            </a>
+        </li>
+
+    </ul>
+
+</nav>
+
+
+<div class="auth-page">
+
+    <div class="auth-box">
+
+        <h2>RastelCraft'a Kayıt Ol</h2>
+
+
+        <input
+            type="text"
+            id="username"
+            placeholder="Kullanıcı adı"
+            maxlength="20"
+            autocomplete="username"
+        >
+
+
+        <input
+            type="email"
+            id="email"
+            placeholder="E-posta"
+            autocomplete="email"
+        >
+
+
+        <input
+            type="password"
+            id="password"
+            placeholder="Şifre"
+            autocomplete="new-password"
+        >
+
+
+        <button
+            id="registerButton"
+            class="auth-submit">
+            Kayıt Ol
+        </button>
+
+
+        <p id="message"></p>
+
+
+        <a
+            href="giris.html"
+            class="switch-auth">
+            Zaten hesabın var mı? Giriş Yap
+        </a>
+
+    </div>
+
+</div>
+
+
+<script>
+
+const SUPABASE_URL =
+    "https://hoasucytohgdjbircqwv.supabase.co";
+
+
+const SUPABASE_KEY =
+    "sb_publishable_nl6kWJyd5gkzoaiRTLo4nw_xZCsiYka";
+
+
+const supabaseClient =
+    window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_KEY
+    );
+
+
+const registerButton =
+    document.getElementById(
+        "registerButton"
+    );
+
+const username =
+    document.getElementById(
+        "username"
+    );
+
+const email =
+    document.getElementById(
+        "email"
+    );
+
+const password =
+    document.getElementById(
+        "password"
+    );
+
+const message =
+    document.getElementById(
+        "message"
+    );
+
+
+registerButton.addEventListener(
+    "click",
+    async function () {
+
+        const usernameValue =
+            username.value.trim();
+
+        const emailValue =
+            email.value.trim();
+
+        const passwordValue =
+            password.value;
+
+
+        if (!usernameValue ||
+            !emailValue ||
+            !passwordValue) {
+
+            message.textContent =
+                "Tüm alanları doldur.";
+
+            return;
+        }
+
+
+        if (usernameValue.length < 3) {
+
+            message.textContent =
+                "Kullanıcı adı en az 3 karakter olmalı.";
+
+            return;
+        }
+
+
+        if (passwordValue.length < 6) {
+
+            message.textContent =
+                "Şifre en az 6 karakter olmalı.";
+
+            return;
+        }
+
+
+        registerButton.disabled = true;
+
+        message.textContent =
+            "Hesap oluşturuluyor...";
+
+
+        const { data, error } =
+            await supabaseClient.auth
+            .signUp({
+
+                email: emailValue,
+
+                password: passwordValue,
+
+                options: {
+
+                    data: {
+
+                        username:
+                            usernameValue
+
+                    },
+
+                    emailRedirectTo:
+                        "https://rastelcraft.github.io/rastelcraft/"
+
+                }
+
+            });
+
+
+        if (error) {
+
+            message.textContent =
+                error.message;
+
+            registerButton.disabled =
+                false;
+
+            return;
+        }
+
+
+        message.textContent =
+            "Kayıt başarılı! E-postanı kontrol et.";
+
+    }
+);
+
+</script>
+
+</body>
+</html>
+```
+
